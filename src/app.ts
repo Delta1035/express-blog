@@ -34,8 +34,8 @@ async function main() {
   try {
     // await loadRouters(app);
     // scanRouter(app);
-    http.createServer(app).listen(3000, "127.0.0.1", () => {
-      console.log("server start 127.0.0.1:3000");
+    http.createServer(app).listen(Number(process.env.SERVER_PORT), "127.0.0.1", () => {
+      console.log(`server start 127.0.0.1:${process.env.SERVER_PORT}`);
     });
   } catch (error) {
     console.log("error :>> ", error);
