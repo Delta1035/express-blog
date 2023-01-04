@@ -1,8 +1,9 @@
 import path from "path";
 import express from "express";
+import { BASE_PATH } from "../constant";
 
 export async function loadRouters(app: express.Application) {
-  const routers = await import(path.join(process.cwd(), "./src/routers"));
+  const routers = await import(path.join(process.cwd(), `./${BASE_PATH}/routers`));
     // console.log(routers);
   for (const routerName of Object.keys(routers)) {
     const prePath =
@@ -14,6 +15,7 @@ export async function loadRouters(app: express.Application) {
     app.use('/'+prePath, routers[routerName] as any);
   }
 }
+
 async function loadService() {
   const services = await import(path.join(__dirname, "../", "./services"));
   console.log(services);

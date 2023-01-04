@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --fix",
-    "dev": "cross-env NODE_ENV=development nodemon --watch ./src/**/* --exec npx ts-node ./src/app.ts",
-    "prod": "cross-env NODE_ENV=production nodemon --watch ./src/**/* --exec npx ts-node ./src/app.ts",
+    "dev": "npx cross-env NODE_ENV=development nodemon --watch ./src/**/* --exec npx ts-node ./src/app.ts",
+    "prod": "npx cross-env NODE_ENV=production ./dist/app.js",
     "start": "npx ts-node src/app.ts",
     "dec": "nodemon --exec ts-node ./src/utils/scanRouter.ts",
-    "build": "npx gulp && node ./dist/app.js"
+    "build": "npx gulp"
   },
   "repository": {
     "type": "git",
