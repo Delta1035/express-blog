@@ -2,22 +2,22 @@
 import express from "express";
 import fs from "fs";
 import https from "https";
-import http from 'http';
+import http from "http";
 import path from "path";
 import cors from "cors";
 import { loadRouters } from "./utils/loader/router-loader";
 import "reflect-metadata";
 import { loginValidator } from "./middleware";
-import { scanRouter } from "./utils/decorator/scanRouter";
+// import { scanRouter } from "./utils/decorator/scanRouter";
 import { configLoader } from "./utils/loader/config-loader";
 require("dotenv").config(); // 加载环境变量
 // console.log(process.env.PORT, typeof process.env.PORT);
 // const __filename = fileURLToPath(import.meta.url);
 const app: express.Application = express();
-const httpOptions = {
-  key: fs.readFileSync(path.join(__dirname, "./keys/privatekey.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "./keys/certificate.pem")),
-};
+// const httpOptions = {
+//   key: fs.readFileSync(path.join(__dirname, "./keys/privatekey.pem")),
+//   cert: fs.readFileSync(path.join(__dirname, "./keys/certificate.pem")),
+// };
 app.use(cors());
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
