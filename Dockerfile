@@ -7,5 +7,6 @@ RUN npm run build
 
 EXPOSE 8086
 
-CMD npm run prods
+CMD npm run prod
+
 

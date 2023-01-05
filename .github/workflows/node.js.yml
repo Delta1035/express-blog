@@ -21,11 +21,37 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'pnpm'
+    # - run: npm ci
+    # - run: npm run build --if-present
+    # - run: npm test
+    - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: 528491526/express-blog:latest
+    # 登录部署服务器 拉取镜像并运行
+    - name: executing remote ssh commands using password
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port : ${{ secrets.SSH_PORT}}
+        command: |
+          docker ps -a 
+          docker rm -f express-blog
+          docker rmi -f 528491526/express-blog
+          docker pull 528491526/express-blog
+          docker run --name express-blog -p 8084:80 -d 528491526/express-blog
