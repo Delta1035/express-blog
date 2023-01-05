@@ -34,8 +34,8 @@ async function main() {
   try {
     // await loadRouters(app);
     // scanRouter(app);
-    http.createServer(app).listen(Number(process.env.SERVER_PORT), "localhost", () => {
-      console.log(`server start localhost:${process.env.SERVER_PORT}`);
+    http.createServer(app).listen(Number(process.env.SERVER_PORT), "127.0.0.1", () => {
+      console.log(`server start 127.0.0.1:${process.env.SERVER_PORT}`);
     });
   } catch (error) {
     console.log("error :>> ", error);
