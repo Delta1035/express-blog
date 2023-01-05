@@ -13,7 +13,7 @@ loginRouter.post("/", async function (req, res) {
     const user = await userRepo.findOneBy({ user_name, password });
     if (user !== null) {
       const token = jwt.sign(req.body, "suibianxiede", { expiresIn: "12H" });
-      const result = await userRepo.update(user.id, {token});
+      const result = await userRepo.update(user.id, { token });
       res.json(Utils.resposne(200, "success", token));
     } else {
       res.json(Utils.resposne(200, "fail", "账号或密码错误！"));
@@ -22,4 +22,8 @@ loginRouter.post("/", async function (req, res) {
     console.log(error);
     res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
+});
+
+loginRouter.get("/test", function (req, res) {
+  res.send('ok')
 });
