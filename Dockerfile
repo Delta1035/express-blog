@@ -5,7 +5,7 @@ RUN npm i -g pnpm
 RUN pnpm i
 RUN npm run build
 
-EXPOSE 8086
+EXPOSE 8087
 
 CMD npm run prod:tsc
 

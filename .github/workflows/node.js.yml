@@ -54,4 +54,4 @@ jobs:
           docker rm -f express-blog
           docker rmi -f 528491526/express-blog
           docker pull 528491526/express-blog
-          docker run --name express-blog -p 8086:8086 -d 528491526/express-blog
+          docker run --name express-blog -p 8087:8087 -d 528491526/express-blog
