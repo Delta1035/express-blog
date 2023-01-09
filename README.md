@@ -46,4 +46,5 @@ express-validator：一个基于Express的数据验证中间件，可以方便�
 
 ## esmodule 引入模块时 如果不加文件后缀会报错
 
-## 
+## 插件
+KoroFileHeader 用于生成文件头部注释和函数注释,保存时自动更新最后编辑时间
