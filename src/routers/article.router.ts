@@ -27,10 +27,10 @@ articleRouter.get("/count", async (req, res) => {
   try {
     const articleRepo = BlogDataSource.getRepository("Article");
     const articles = await articleRepo.count();
-    res.json(Utils.resposne(200,'success', articles));
+    res.json(Utils.resposne(200, "success", articles));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
 
@@ -43,10 +43,10 @@ articleRouter.get("/:skip/:take", async function (req, res) {
       skip: Number(skip),
       take: Number(take),
     });
-    res.json(Utils.resposne(200,'success', articles));
+    res.json(Utils.resposne(200, "success", articles));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
 // TODO
@@ -65,19 +65,37 @@ articleRouter.post("/author_id/:author_id", async (req, res) => {
   try {
     const author_id = req.params.author_id;
     console.log(author_id);
-    
+
     const articleRepo = BlogDataSource.getRepository("Article");
     const article = new Article();
     article.create_time = new Date();
     article.author_id = Number(author_id);
-    article.summary = ''
+    article.summary = "";
     console.log(Object.assign(article, req.body));
-    
+
     const result = await articleRepo.save(Object.assign(article, req.body));
-    res.json(Utils.resposne(200,'success', result));
+    res.json(Utils.resposne(200, "success", result));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
+  }
+});
+
+articleRouter.get("/id", async (req, res) => {
+  try {
+    const {id} = req.query;
+    console.log(id);
+    const articleRepo = BlogDataSource.getRepository("Article");
+    const result = await articleRepo.findOne({
+      where: {
+        id,
+      },
+    });
+    console.log(result);
+    res.json(Utils.resposne(200, "success", result));
+  } catch (error) {
+    console.log(error);
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
 
@@ -88,11 +106,10 @@ articleRouter.patch("/id/:id", async (req, res) => {
     const article = new Article();
     article.deleted = 1;
     const result = await articleRepo.update(id, article);
-        res.json(Utils.resposne(200,'success', result));
-
+    res.json(Utils.resposne(200, "success", result));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
 
@@ -105,11 +122,10 @@ articleRouter.put("/id/:id", async (req, res) => {
       id,
       Object.assign(article, req.body)
     );
-        res.json(Utils.resposne(200,'success', result));
-
+    res.json(Utils.resposne(200, "success", result));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
 
@@ -118,10 +134,9 @@ articleRouter.delete("/id/:id", async (req, res) => {
     const id = req.params.id;
     const articleRepo = BlogDataSource.getRepository("Article");
     const result = await articleRepo.delete(id);
-        res.json(Utils.resposne(200,'success', result));
-
+    res.json(Utils.resposne(200, "success", result));
   } catch (error) {
     console.log(error);
-    res.json(Utils.resposne(200,'fail', JSON.stringify(error)));
+    res.json(Utils.resposne(200, "fail", JSON.stringify(error)));
   }
 });
