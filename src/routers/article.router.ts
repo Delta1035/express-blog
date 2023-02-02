@@ -50,7 +50,7 @@ articleRouter.get("/:skip/:take", async function (req, res) {
   }
 });
 // TODO
-articleRouter.get("/:author_id", (req, res) => {});
+articleRouter.get("/author_id/:author_id", (req, res) => {});
 
 articleRouter.post(
   "/",
@@ -61,7 +61,7 @@ articleRouter.post(
   }
 );
 
-articleRouter.post("/:author_id", async (req, res) => {
+articleRouter.post("/author_id/:author_id", async (req, res) => {
   try {
     const author_id = req.params.author_id;
     console.log(author_id);
@@ -81,7 +81,7 @@ articleRouter.post("/:author_id", async (req, res) => {
   }
 });
 
-articleRouter.patch("/:id", async (req, res) => {
+articleRouter.patch("/id/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const articleRepo = BlogDataSource.getRepository("Article");
@@ -96,7 +96,7 @@ articleRouter.patch("/:id", async (req, res) => {
   }
 });
 
-articleRouter.put("/:id", async (req, res) => {
+articleRouter.put("/id/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const articleRepo = BlogDataSource.getRepository("Article");
@@ -113,7 +113,7 @@ articleRouter.put("/:id", async (req, res) => {
   }
 });
 
-articleRouter.delete("/:id", async (req, res) => {
+articleRouter.delete("/id/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const articleRepo = BlogDataSource.getRepository("Article");
